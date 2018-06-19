@@ -1,4 +1,3 @@
-package com.utils;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
@@ -14,7 +13,15 @@ import java.nio.channels.FileChannel;
 /**
  * 作者: rhyme(rhymelph@qq.com).
  * 日期: 2018/6/19.
- * 描述: .
+ * 描述: (
+ *  The First:init
+ *  - RhyPreferencesBackUp.Instance(context);
+ *
+ *  Second: use method
+ *  - backup(String sharePreferenceName, String path);
+ *  - restore(String sharePreferenceName, String path);
+ *  - checkPreferenceFile(String sharePreferenceName);
+ * ).
  */
 public class RhyPreferencesBackUp {
     private static final String Method_Name = "getSharedPreferencesPath";
@@ -49,8 +56,11 @@ public class RhyPreferencesBackUp {
      *
      * @param sharePreferenceName sharePreferences文件名(share preferences name)
      * @param path                备份目录文件(backup file parent path)
+     * @return 返回是否恢复成功(Is backup success ?)
      */
-    public void backup(String sharePreferenceName, String path) {
+    public boolean backup(String sharePreferenceName, String path) {
+        boolean isSuccess=false;
+
         try {
             Class pclass = context.getClass();
             Method getSharedPreferencesPath = pclass.getMethod(Method_Name, String.class);
@@ -58,10 +68,11 @@ public class RhyPreferencesBackUp {
             Object object = getSharedPreferencesPath.invoke(context, sharePreferenceName);
             File mFile = new File(object.toString());
 
-            FileUtils.copyFile(mFile, path + "/");
+            isSuccess=FileUtils.copyFile(mFile, path + "/");
         } catch (Exception e) {
             e.printStackTrace();
         }
+        return  isSuccess;
     }
 
     /**
@@ -95,15 +106,14 @@ public class RhyPreferencesBackUp {
     /**
      * 检查Preferences文件是否存在
      *
-     * @param context              上下文
-     * @param SharePreferencesName Preferences文件名
+     * @param sharePreferenceName Preferences文件名
      * @return
      */
-    public static boolean checkPreferenceFile(Context context, String SharePreferencesName) {
+    public  boolean checkPreferenceFile(String sharePreferenceName) {
         try {
             Class pclass = context.getClass();
             Method getSharedPreferencesPath = pclass.getMethod(Method_Name, String.class);
-            Object object = getSharedPreferencesPath.invoke(context, SharePreferencesName);
+            Object object = getSharedPreferencesPath.invoke(context, sharePreferenceName);
             File mFile = new File(object.toString());
             return mFile.exists();
         } catch (Exception e) {

@@ -1,4 +1,3 @@
-package com.common.download;
 
 import android.database.Cursor;
 import android.text.TextUtils;

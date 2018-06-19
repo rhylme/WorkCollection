@@ -28,3 +28,16 @@ public class GreenDaoOpenHelper extends DaoMaster.OpenHelper {
     }
 }
 ```
+
+## 2. Backup sharePreferences file and restore
+ [RhyPreferencesBackUp.java](/RhyPreferencesBackUp.java)</br>
+ Use about:
+```java
+   The First:init
+   - RhyPreferencesBackUp.Instance(context);
+
+   Second: use method
+   - backup(String sharePreferenceName, String path);
+   - restore(String sharePreferenceName, String path)；
+   - checkPreferenceFile(String sharePreferenceName)；
+```

@@ -6,7 +6,8 @@ My work collection From Android
 - position: Developer of Android 
 
 ## 1.Solve the problem about greendao upgrade
-[MigrationHelper.java](/MigrationHelper.java)Use about:
+ [MigrationHelper.java](/MigrationHelper.java)</br>
+ Use about:
 ```java
 public class GreenDaoOpenHelper extends DaoMaster.OpenHelper {
 
